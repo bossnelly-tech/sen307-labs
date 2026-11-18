@@ -63,7 +63,7 @@ INSERT INTO Lecturer (staff_no, full_name, email, dept_id) VALUES
 
 
 INSERT INTO Student (matric_no, full_name, gender, date_of_birth, dept_id) VALUES
-('20231234', 'Ada Obi', 'F', '2005-03-14', 1),
+('20231234', 'Ada Obi', 'F', '2005-03-14', 2),
 ('20231235', 'John Musa', 'M', '2004-11-02', 2),
 ('20231236', 'Rose Mary', 'F', '2004-07-02', 3),
 ('20231237', 'Jane ola', 'F', '2004-11-03', 4),
@@ -84,6 +84,11 @@ INSERT INTO Student (matric_no, full_name, gender, date_of_birth, dept_id) VALUE
 ('20231252', 'prisca david', 'F', '2007-11-14', 4),
 ('20231253', 'ella onuoha', 'F', '2007-11-17', 5);
 
+UPDATE Student
+SET matric_no = "vug/sen/25/14857", full_name ="Okeh Chidera Nelson", gender = "M", date_of_birth ="2008-05-07", dept_id= 1
+WHERE matric_no = "vug/sen/25/14857";
+
+SELECT * FROM STUDENT;
 
 SELECT * FROM Lecturer;
 SELECT * FROM Course;
@@ -136,3 +141,12 @@ UNION ALL SELECT 'Students', COUNT(*) FROM Student
 UNION ALL SELECT 'Courses', COUNT(*) FROM Course
 UNION ALL SELECT 'Enrolments', COUNT(*) FROM Enrolment
 UNION ALL SELECT 'Allocations', COUNT(*) FROM CourseAllocation;
+
+
+-- Task 3 (worked example): every student and their courses,
+-- including students with no enrolments
+SELECT s.full_name, c.course_title
+FROM Student s
+LEFT JOIN Enrolment e ON s.student_id = e.student_id
+LEFT JOIN Course c ON e.course_id = c.course_id
+ORDER BY s.full_name;
